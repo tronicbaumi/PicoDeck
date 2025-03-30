@@ -1,0 +1,185 @@
+// All documentation
+
+Clear
+Printer=PDF24,A3
+Path=C:\_prg\...
+
+Variants = True
+Variant = Clear
+Variant = 2
+
+View=SCH
+
+Name=SCH_$P$_$D$_$T$
+Color=True
+BackGround=False
+SheetFit=True
+Pages=All
+Landscape
+Print
+
+View=PCB
+
+// full PCB
+Color=True
+BackGround=False
+SheetFit=False
+Scale=100
+GroundLines=True
+LayerOff=All
+LayerOn=2,7,16,21,23,24,28,29
+Mirror=False
+Landscape
+Print
+
+// PCB TOP
+Color=True
+BackGround=False
+SheetFit=False
+Scale=100
+GroundLines=True
+LayerOff=All
+LayerOn=16,21,23,24,30,31
+Mirror=False
+Landscape
+Print
+
+// PCB BOTTOM
+Color=True
+BackGround=False
+SheetFit=False
+Scale=100
+GroundLines=True
+LayerOff=All
+LayerOn=2,7,23,24,28,29
+Mirror=False
+Landscape
+Print
+
+// PP TOP
+Color=True
+BackGround=False
+SheetFit=False
+Scale=100
+GroundLines=True
+LayerOff=All
+LayerOn=21,23,28,30,31
+Mirror=False
+Landscape
+Print
+
+//PP BOTTOM
+Color=True
+BackGround=False
+SheetFit=False
+Scale=100
+GroundLines=True
+LayerOff=All
+LayerOn=7,23,28,29
+Mirror=True
+Landscape
+Print
+
+// PIN NUMBERS
+Color=True
+BackGround=False
+SheetFit=False
+Scale=100
+GroundLines=True
+LayerOff=All
+LayerOn=2,16,23,24,26
+Mirror=False
+Landscape
+Print
+
+
+//LAYOUT TOP
+Color=True
+BackGround=False
+SheetFit=False
+Scale=100
+GroundLines=True
+LayerOff=All
+LayerOn=16,23,24
+Mirror=False
+Landscape
+Print
+
+// LAYOUT BOTTOM
+Color=True
+BackGround=False
+SheetFit=False
+Scale=100
+GroundLines=True
+LayerOff=All
+LayerOn=2,23,24
+Mirror=True
+Landscape
+Print
+
+// LAYOUT
+Color=True
+BackGround=False
+SheetFit=False
+Scale=100
+GroundLines=True
+LayerOff=All
+LayerOn=2,16,23,24
+Mirror=False
+Landscape
+Print
+
+//SOLDERSTOP TOP
+Color=True
+BackGround=False
+SheetFit=False
+Scale=100
+GroundLines=True
+LayerOff=All
+LayerOn=18,23,24
+Mirror=False
+Landscape
+Print
+
+// SOLDERSTOP BOTTOM
+Color=True
+BackGround=False
+SheetFit=False
+Scale=100
+GroundLines=True
+LayerOff=All
+LayerOn=4,23,24
+Mirror=True
+Landscape
+Print
+
+//PHOTO LAYOUT TOP
+
+Clear
+BackGround=False
+SheetFit=False
+Scale=100
+GroundLines=True
+LayerOff=All
+LayerOn=16,23,24
+Mirror=True
+Color=False
+//Blackness=100
+SmallDrill=True
+Landscape
+Print
+
+//PHOTO LAYOUT BOTTOM
+Clear
+BackGround=False
+SheetFit=False
+Scale=100
+GroundLines=True
+LayerOff=All
+LayerOn=2,23,24
+Mirror=False
+Color=False
+//Blackness=100
+SmallDrill=True
+Landscape
+Print

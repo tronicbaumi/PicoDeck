@@ -1,3 +1,11 @@
+# Ignore all
+*
+# Unignore all with extensions
+!*.*
+# Unignore all dirs
+!*/
+
+
 # Prerequisites
 *.d
 
@@ -50,3 +58,38 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# MPLAB X
+*.d
+*.pre
+*.p1
+*.lst
+*.sym
+*.obj
+*.o
+*.sdb
+*.obj.dmp
+html/
+nbproject/private/
+nbproject/Package-*.bash
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+funclist
+nbproject/Makefile-*
+disassembly/
+*.map
+
+#Target files
+*.BK1
+*.BK2
+*.BK3
+*.BK4
+*.BK5
+*.T3001A
+*.T3001B
+*.T3001C
+*.T3001OPEN
