@@ -1,4 +1,4 @@
-# Arduino Micro Control Panel
+# Arduino Micro PICODeck
 
 A small Arduino Micro (ATmega32u4 / Leonardo-compatible) sketch that wires up
 two KY-040 rotary encoders (with built-in push buttons), four momentary push
