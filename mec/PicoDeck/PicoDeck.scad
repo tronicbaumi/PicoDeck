@@ -38,12 +38,18 @@ btn_pitch = 22;
 enc_d   = 8;
 enc_s   = 36;
 enc_pitch = 40;
-// OLED 0.96" 128x64 (Modul ca. 27.3 x 27.8 mm, sichtbare Flaeche ca. 21.7 x 10.9 mm)
+// OLED 0.96" 128x64 laut Datenblatt: Platine 27.3 x 27.3 (+-0.5), aktive Flaeche 21.74 x 10.86,
+// 4 Loecher 2.5 mm im Raster 20.7 x 23.2. Das Modul sitzt mit dem Pinheader zur Rueckseite (hoeheres s).
 oled_s      = 66;
-oled_win    = [22.4, 11.6];   // Ausschnitt (Breite, Laenge entlang der Schraege)
-oled_mod    = [27.8, 28.2];   // Modulplatine inkl. Spiel
-oled_win_dy = 0;              // Versatz des Fensters zur Modulmitte (ggf. anpassen)
+oled_win    = [22.4, 11.6];   // Ausschnitt (Breite, Laenge entlang der Schraege) = aktive Flaeche + ca. 0.35 Rand
+oled_mod    = [28.0, 28.0];   // Modultasche = Platine 27.3 + Toleranz 0.5 + Spiel
+oled_win_dy = 1.76;           // aktive Flaeche liegt 1.76 mm Richtung Pinheader aus der Platinenmitte
 oled_frame  = 1.6;            // Wand des Halterahmens
+oled_hole   = [20.7, 23.2];   // Lochraster der Befestigungsloecher
+oled_boss_d = 3.4;            // Auflage um die Loecher (Pad am Modul 3.5)
+oled_peg_d  = 2.2;            // Zapfen durch die 2.5-mm-Loecher
+oled_pcb_t  = 1.0;            // Platinendicke (Annahme)
+oled_boss_h = 1.6;            // Dach-Innenseite bis Platinenvorderseite = Glasdicke ca. 1.4 (Annahme) + 0.2 Spiel
 
 a = atan((Hb - Hf) / D);      // Neigungswinkel der Oberseite
 
@@ -157,6 +163,13 @@ module oled_frame()
             translate([-oled_mod[0] / 2, -oled_mod[1] / 2, -t - 5])
                 cube([oled_mod[0], oled_mod[1], 6]);   // bis ins Dach, damit das Fenster frei bleibt
         }
+    // Zapfen fuer die 4 Befestigungsloecher des Moduls (Datenblatt: 4x 2,5 mm, 20,7 x 23,2 mm)
+    on_slope(oled_s, W / 2)
+        for (sx = [-1, 1], sy = [-1, 1])
+            translate([sx * oled_hole[0] / 2, sy * oled_hole[1] / 2, -t]) {
+                translate([0, 0, -oled_boss_h]) cylinder(d = oled_boss_d, h = oled_boss_h + 0.5);
+                translate([0, 0, -oled_boss_h - oled_pcb_t - 0.4]) cylinder(d = oled_peg_d, h = oled_pcb_t + 0.4 + 0.1);
+            }
 }
 
 // ================= Bodenplatte =================
