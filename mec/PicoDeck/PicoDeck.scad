@@ -14,7 +14,7 @@ part = "both";   // [both:Oberteil + Bodenplatte nebeneinander, assembly:zusamme
 
 // ---- Gehaeuse ----
 W  = 120;   // Breite
-D  = 80;   // Tiefe
+D  = 75;   // Tiefe
 Hf = 20;    // Hoehe vorne
 Hb = 60;    // Hoehe hinten
 r  = 3;     // Kantenradius
@@ -29,18 +29,32 @@ post_d  = 7;      // Schraubdom Aussendurchmesser
 post_h_d = 2.6;   // Kernloch fuer M3 (selbstschneidend)
 screw_d = 3.4;    // Durchgangsloch in der Bodenplatte
 rib_w   = 2;      // Stegbreite zwischen Schraubdom und Wand
-post_in = 7.5;   // Abstand der Schraubdome von den Aussenkanten
+// ---- Montage fuer Lochrasterplatine 70 x 50 mm (Abstandsbolzen auf der Bodenplatte) ----
+pcb_size    = [70, 50];   // Platine (x = Breite, y = Tiefe)
+pcb_hole_in = 3;          // Lochmitte von den Platinenkanten
+pcb_post_d  = 6;          // Durchmesser der Bolzen
+pcb_post_h  = 6;          // Hoehe ueber der Bodenplatte
+pcb_screw_d = 2.6;        // Kernloch fuer M3 (selbstschneidend)
+pcb_back    = 3;          // Abstand der Platinenhinterkante zur Innenseite der Rueckwand
+// ---- USB-C Durchbruch in der Rueckwand (Arduino Micro auf Stiftleisten ueber der Lochrasterplatine) ----
+pcb_t        = 1.6;    // Dicke der Lochrasterplatine
+header_h     = 8.5;    // Hoehe der Buchsenleisten (Platinenoberseite bis Micro-Unterseite)
+micro_t      = 1.6;    // Dicke der Arduino-Micro-Platine
+usb_conn_h   = 3.2;    // Hoehe der USB-C-Buchse ueber der Micro-Platine
+usb_cut      = [13, 7.5];   // Durchbruch (Breite, Hoehe): Stecker-Spritzling ca. 12.4 x 6.5 mm
+usb_x        = 0;      // seitlicher Versatz zur Gehaeusemitte
+post_in = 7.5; // Abstand der Schraubdome von den Aussenkanten
 
 // ---- Bedienelemente (Position entlang der Schraegen, s = Abstand von der Vorderkante) ----
-btn_d   = 8;
+btn_d   = 9;
 btn_s   = 12;
 btn_pitch = 22;
-enc_d   = 8;
+enc_d   = 7;
 enc_s   = 36;
 enc_pitch = 40;
 // OLED 0.96" 128x64 laut Datenblatt: Platine 27.3 x 27.3 (+-0.5), aktive Flaeche 21.74 x 10.86,
 // 4 Loecher 2.5 mm im Raster 20.7 x 23.2. Das Modul sitzt mit dem Pinheader zur Rueckseite (hoeheres s).
-oled_s      = 66;
+oled_s      = 60;
 oled_win    = [22.4, 11.6];   // Ausschnitt (Breite, Laenge entlang der Schraege) = aktive Flaeche + ca. 0.35 Rand
 oled_mod    = [28.0, 28.0];   // Modultasche = Platine 27.3 + Toleranz 0.5 + Spiel
 oled_win_dy = 1.76;           // aktive Flaeche liegt 1.76 mm Richtung Pinheader aus der Platinenmitte
@@ -58,6 +72,14 @@ function ztop(y) = Hf + tan(a) * y;
 // Punkt auf der Schraege im Abstand s von der Vorderkante
 function sl_y(s) = s * cos(a);
 function sl_z(s) = Hf + s * sin(a);
+
+// Bolzenpositionen: Platine mittig in x, hinten an der Rueckwand
+function pcb_posts() =
+    let (x0 = W / 2 - pcb_size[0] / 2,
+         y1 = D - t - pcb_back,
+         y0 = y1 - pcb_size[1])
+    [for (x = [x0 + pcb_hole_in, x0 + pcb_size[0] - pcb_hole_in],
+          y = [y0 + pcb_hole_in, y1 - pcb_hole_in]) [x, y]];
 
 screws = [[post_in, post_in], [W - post_in, post_in],
           [post_in, D - post_in], [W - post_in, D - post_in]];
@@ -100,6 +122,7 @@ module top()
         // Rastnuten
         snap_features(groove = true);
         controls_cut();
+        usb_cutout();
     }
     oled_frame();
 }
@@ -151,6 +174,20 @@ module controls_cut()
             cube([oled_win[0], oled_win[1], 20], center = true);
 }
 
+// Hoehe der Mitte der USB-Buchse ueber der Bodenplatte
+function usb_z() = pcb_post_h + pcb_t + header_h + micro_t + usb_conn_h / 2;
+
+// USB-C Durchbruch mittig in der Rueckwand (abgerundetes Rechteck)
+module usb_cutout()
+{
+    rr = 1.5;
+    translate([W / 2 + usb_x, D - t - 1, usb_z()])
+        rotate([-90, 0, 0])
+            linear_extrude(t + 2)
+                hull() for (sx = [-1, 1], sz = [-1, 1])
+                    translate([sx * (usb_cut[0] / 2 - rr), sz * (usb_cut[1] / 2 - rr)]) circle(r = rr);
+}
+
 // Halterahmen fuer das OLED-Modul auf der Dachinnenseite
 module oled_frame()
 {
@@ -191,7 +228,13 @@ module bottom()
                 }
             }
             snap_features(groove = false);
+            // Abstandsbolzen fuer die Lochrasterplatine
+            for (p = pcb_posts())
+                translate([p[0], p[1], -0.01]) cylinder(d = pcb_post_d, h = pcb_post_h + 0.01);
         }
+        // Gewindekerne der Bolzen (Sackloch von oben)
+        for (p = pcb_posts())
+            translate([p[0], p[1], pcb_post_h - 5]) cylinder(d = pcb_screw_d, h = 5.1);
         // Senkschrauben von unten
         for (p = screws)
             translate([p[0], p[1], 0]) {

@@ -199,6 +199,19 @@ means `oled_win_dy = -1.76`.
   the side and front/back walls by 2 mm ribs. Pilot hole 2.6 mm for M3
   self-tapping screws; the base plate has 3.4 mm countersunk holes, screws
   go in from below.
+- The base plate carries **4 standoffs** (6 mm diameter, 6 mm high, 2.6 mm
+  blind pilot hole for M3) for a 70 x 50 mm prototyping PCB. The board is
+  centered in x and sits against the back wall (3 mm gap); the holes are 3 mm
+  from the board edges (`pcb_size`, `pcb_hole_in`, `pcb_post_d`, `pcb_post_h`,
+  `pcb_screw_d`, `pcb_back`). Hole positions: x = 28 / 92 mm, y = 27.6 / 71.6 mm
+  with the default housing. Check them against your board and adjust
+  `pcb_hole_in` if its holes are placed differently.
+- The back wall has a **USB-C opening** (13 x 7.5 mm, rounded) centered in x.
+  Its height is computed for an Arduino Micro plugged into single-row
+  female headers on the prototyping PCB: 6 mm standoff + 1.6 mm PCB + 8.5 mm
+  header + 1.6 mm Micro PCB + half of the 3.2 mm connector = connector center
+  at about z = 19.3 mm. Adjust `header_h`, `pcb_t`, `micro_t`, `usb_conn_h`,
+  `usb_cut` and `usb_x` if your parts differ.
 - Print the top shell open side down; the sloped roof needs supports. Print
   the base plate flat.
 - `part = "assembly"` shows the closed housing for checking fit.
@@ -214,7 +227,6 @@ means `oled_win_dy = -1.76`.
 - The firmware uses polling in `loop()` (no pin-change interrupts), so very
   fast encoder turns can lose steps if the loop is delayed. The `Send_Combo`
   helper blocks for about 90 ms per modifier keystroke.
-- The housing has no cut-out for the Micro's USB connector yet.
 - `sw/` is a placeholder.
 
 ## License
