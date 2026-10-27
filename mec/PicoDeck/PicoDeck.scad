@@ -31,7 +31,7 @@ screw_d = 3.4;    // Durchgangsloch in der Bodenplatte
 rib_w   = 2;      // Stegbreite zwischen Schraubdom und Wand
 // ---- Montage fuer Lochrasterplatine 70 x 50 mm (Abstandsbolzen auf der Bodenplatte) ----
 pcb_size    = [70, 50];   // Platine (x = Breite, y = Tiefe)
-pcb_hole_in = 3;          // Lochmitte von den Platinenkanten
+pcb_hole_in = 2;          // Lochmitte von den Platinenkanten
 pcb_post_d  = 6;          // Durchmesser der Bolzen
 pcb_post_h  = 6;          // Hoehe ueber der Bodenplatte
 pcb_screw_d = 2.6;        // Kernloch fuer M3 (selbstschneidend)
@@ -46,17 +46,17 @@ usb_x        = 0;      // seitlicher Versatz zur Gehaeusemitte
 post_in = 7.5; // Abstand der Schraubdome von den Aussenkanten
 
 // ---- Bedienelemente (Position entlang der Schraegen, s = Abstand von der Vorderkante) ----
-btn_d   = 9;
+btn_d   = 12.3;
 btn_s   = 12;
-btn_pitch = 22;
-enc_d   = 7;
+btn_pitch = 24;
+enc_d   = 7.3;
 enc_s   = 36;
-enc_pitch = 40;
+enc_pitch = 44;
 // OLED 0.96" 128x64 laut Datenblatt: Platine 27.3 x 27.3 (+-0.5), aktive Flaeche 21.74 x 10.86,
 // 4 Loecher 2.5 mm im Raster 20.7 x 23.2. Das Modul sitzt mit dem Pinheader zur Rueckseite (hoeheres s).
 oled_s      = 60;
-oled_win    = [22.4, 11.6];   // Ausschnitt (Breite, Laenge entlang der Schraege) = aktive Flaeche + ca. 0.35 Rand
-oled_mod    = [28.0, 28.0];   // Modultasche = Platine 27.3 + Toleranz 0.5 + Spiel
+oled_win    = [22.8, 12.00];   // Ausschnitt (Breite, Laenge entlang der Schraege) = aktive Flaeche + ca. 0.35 Rand
+oled_mod    = [28.3, 28.3];   // Modultasche = Platine 27.3 + Toleranz 0.5 + Spiel
 oled_win_dy = 1.76;           // aktive Flaeche liegt 1.76 mm Richtung Pinheader aus der Platinenmitte
 oled_frame  = 1.6;            // Wand des Halterahmens
 oled_hole   = [20.7, 23.2];   // Lochraster der Befestigungsloecher
