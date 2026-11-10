@@ -1,5 +1,7 @@
 # PicoDeck
 
+![PicoDeck in operation](doc/operation.jpg)
+
 A small USB control panel for **PicoScope 7**, built around an Arduino Micro
 (ATmega32u4). It enumerates as a USB HID keyboard and turns two rotary
 encoders and four push buttons into the keyboard shortcuts PicoScope uses
@@ -9,11 +11,11 @@ for amplitude, offset, filter, time base, trigger and pre-trigger. A 0.96"
 ```
   +--------------------------------------------+
   |        [ OLED 128x64  "PicoDECK" ]         |   <- sloped top face
-  |          CH 1            AMP     TIME      |
+  |    CH 1            AMP           TIME      |
   |                                            |
   |        (ENC1)                (ENC2)        |
   |                                            |
-  |   (BTN1)  (BTN2)  (BTN3)  (BTN4)           |
+  |     (BTN1)   (BTN2)   (BTN3)    (BTN4)     |
   +--------------------------------------------+
 ```
 
