@@ -27,7 +27,6 @@ for amplitude, offset, filter, time base, trigger and pre-trigger. A 0.96"
 | [`mec/PicoDeck/`](mec/PicoDeck) | OpenSCAD housing (`PicoDeck.scad`, `PicoDeck.stl`), OLED datasheet, helper libraries (BOSL2, MCAD, Write) | working |
 | [`hw/PicoDeck/`](hw/PicoDeck) | KiCad project: schematic started (Pro Mini socket, connectors, four 4.7k pull-ups), PCB not laid out yet | in progress, see [Known gaps](#known-gaps) |
 | [`doc/`](doc) | Photos (`operation.jpg`, `start.jpg`), OpenSCAD render, PicoScope 7 / Pico logos, `bom.txt` (part links) | reference |
-| [`sw/`](sw) | PC software | placeholder, empty |
 
 ## Hardware
 
@@ -100,7 +99,7 @@ the default; `OLED32` and `OLED64_13` are prepared but commented out).
 | `BUTTONS.ino` | button polling with debounce, key is typed on **release** |
 | `OLED.ino` | display init (PicoScope 7 logo for 2 s) and the three redraw functions |
 | `logo.h` | PicoScope 7 start-up bitmap |
-| `GPIO.ino`, `LOGGER.ino` | empty placeholders |
+
 
 Debounce time is 25 ms (`SW_DEBOUNCE_MS`). Serial debug output runs at
 115200 baud.
