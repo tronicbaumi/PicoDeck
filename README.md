@@ -19,6 +19,8 @@ for amplitude, offset, filter, time base, trigger and pre-trigger. A 0.96"
   +--------------------------------------------+
 ```
 
+📖 See the [User Manual](user_manual.md) for how to operate the PicoDeck.
+
 ## Repository layout
 
 | Folder | Content | State |
