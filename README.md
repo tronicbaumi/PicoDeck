@@ -41,6 +41,18 @@ for amplitude, offset, filter, time base, trigger and pre-trigger. A 0.96"
 | 4 | Momentary push button | 8 mm mounting holes in the housing |
 | 4 | M3 screws (about 8-10 mm) | fix the base plate |
 
+### BOM (sources)
+
+| Part | Link |
+|------|------|
+| Arduino Micro | [Amazon](https://link.amazon/B075QfXTy) |
+| Buttons | [Amazon](https://link.amazon/B0j9Enauz) |
+| Encoder | [Amazon](https://link.amazon/B09QyfqTl) |
+| PCB | [Amazon](https://link.amazon/B01gShNRL) |
+| Socket header (Buchsenleiste) | [Amazon](https://link.amazon/B0bQtWuN1) |
+| Display | [Amazon](https://link.amazon/B0fDqReII) |
+| Filament | [Amazon](https://link.amazon/B03MNQb0l) |
+
 ### Pin assignment (as defined in `fw/PicoDeck/general.h`)
 
 | Function | Arduino pin | Notes |
@@ -148,6 +160,8 @@ Text size 2 (12 x 16 px per character) on a 128 x 64 screen:
 After power-up the PicoScope 7 logo is shown for 2 seconds.
 
 ## Housing (OpenSCAD)
+
+![PicoDeck housing rendered in OpenSCAD](doc/PicoDeck_scad.png)
 
 [`mec/PicoDeck/PicoDeck.scad`](mec/PicoDeck/PicoDeck.scad) generates a
 wedge-shaped desktop housing in two parts: the **top shell** and a separate
