@@ -24,9 +24,9 @@ for amplitude, offset, filter, time base, trigger and pre-trigger. A 0.96"
 | Folder | Content | State |
 |--------|---------|-------|
 | [`fw/PicoDeck/`](fw/PicoDeck) | Arduino firmware (`.ino` tabs + headers) | working |
-| [`mec/PicoDeck/`](mec/PicoDeck) | OpenSCAD housing (`PicoDeck.scad`), OLED datasheet, helper libraries (BOSL2, MCAD, Write) | working |
-| [`hw/`](hw) | Early KiCad / Fritzing descriptions (`.net`, `.fz`), empty KiCad project in `hw/PicoDeck/` | **outdated**, see [Known gaps](#known-gaps) |
-| [`doc/`](doc) | Screenshots, PicoScope 7 / Pico logos, Eagle-style script exports (`bom.scr`, `pcb.scr`, `sch.scr`), title page | reference |
+| [`mec/PicoDeck/`](mec/PicoDeck) | OpenSCAD housing (`PicoDeck.scad`, `PicoDeck.stl`), OLED datasheet, helper libraries (BOSL2, MCAD, Write) | working |
+| [`hw/PicoDeck/`](hw/PicoDeck) | KiCad project: schematic started (Pro Mini socket, connectors, four 4.7k pull-ups), PCB not laid out yet | in progress, see [Known gaps](#known-gaps) |
+| [`doc/`](doc) | Photos (`operation.jpg`, `start.jpg`), OpenSCAD render, PicoScope 7 / Pico logos, `bom.txt` (part links) | reference |
 | [`sw/`](sw) | PC software | placeholder, empty |
 
 ## Hardware
@@ -234,11 +234,8 @@ means `oled_win_dy = -1.76`.
 
 ## Known gaps
 
-- `hw/` still describes an earlier pin assignment (encoders on D8-D13,
-  buttons on D4-D7 with internal pull-ups). The netlist (`arduino_micro_panel.net`),
-  Fritzing description (`arduino_micro_panel.fz`) and the helper READMEs
-  `hw/README_KiCad.md` / `hw/README_FZ.md` do **not** match the current firmware
-  in `general.h`. The KiCad project in `hw/PicoDeck/` is an empty skeleton.
+- The KiCad schematic in `hw/PicoDeck/` is only started and has not been
+  checked against the pin assignment in `general.h`; the PCB is not laid out.
 - The firmware expects external pull-ups on D10, D14, D15 and D16.
 - The firmware uses polling in `loop()` (no pin-change interrupts), so very
   fast encoder turns can lose steps if the loop is delayed. The `Send_Combo`
